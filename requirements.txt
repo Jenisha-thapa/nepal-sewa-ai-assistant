@@ -1,0 +1,25 @@
+# --- Phase 1-2: ingestion & document processing ---
+requests>=2.31
+beautifulsoup4>=4.12
+PyYAML>=6.0
+pymupdf>=1.24          # PDF text/table extraction (fitz)
+pytesseract>=0.3.10     # OCR fallback for scanned documents (requires system tesseract + Nepali traineddata)
+
+# --- Phase 4-6: embeddings & retrieval ---
+sentence-transformers>=3.0   # multilingual embedding models
+rank-bm25>=0.2.2             # BM25 lexical retrieval baseline
+chromadb>=0.5                # vector store option (alternative: faiss-cpu)
+# faiss-cpu>=1.8              # uncomment if you choose FAISS over ChromaDB
+
+# --- Phase 7: generation ---
+# Add your chosen LLM client here once selected, e.g.:
+# openai>=1.0
+# anthropic>=0.30
+
+# --- Phase 10-11: evaluation & app ---
+scikit-learn>=1.4      # classifier metrics (accuracy/precision/recall/F1)
+gradio>=4.0             # demonstration web interface
+
+# --- dev/testing ---
+pytest>=8.0
+python-dotenv>=1.0

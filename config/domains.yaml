@@ -1,0 +1,86 @@
+# Domain and source configuration for the Domain-Aware RAG Agent.
+#
+# Transcribed from the proposal's "Data Collection and Preparation" section
+# and Reference list. URLs are as cited in the proposal — VERIFY each one
+# resolves and still points to current content before running large-scale
+# ingestion; government sites restructure pages without notice, and some
+# slugs below look like CMS-auto-generated (e.g. non-English-looking
+# English slugs), which is normal for Nepali government sites but should
+# still be eyeballed once by a human before Phase 1 acquisition runs at scale.
+#
+# name_np fields are intentionally left blank — fill in the official Nepali
+# service name yourselves rather than trusting a guessed translation here.
+
+domains:
+  - id: identity_civil_registration
+    name_en: "Identity & Civil Registration"
+    name_np: ""  # TODO: confirm official Nepali service name
+    description: >
+      National ID and civil-registration procedures (birth, death, marriage
+      registration; national ID card application and status).
+    authority: "Department of National ID and Civil Registration (DoNIDCR)"
+    sources:
+      - name: "DoNIDCR — National ID FAQs"
+        url: "https://donidcr.gov.np/pages/abboyed-asked-questions--rational-identity-10/"
+        type: "faq"
+      - name: "DoNIDCR — National ID Online Application Info"
+        url: "https://donidcr.gov.np/content/293/information-on-national-identity-card-online-application/"
+        type: "procedure"
+
+  - id: land_property
+    name_en: "Land & Property Services"
+    name_np: ""  # TODO: confirm official Nepali service name
+    description: >
+      Land registration and ownership-transfer procedures (e.g. जग्गा नामसारी).
+    authority: "Department of Land Management and Archive"
+    sources:
+      - name: "Department of Land Management and Archive — Official Portal"
+        url: "https://dolma.gov.np/"
+        type: "portal"
+
+  - id: employment_labour
+    name_en: "Employment & Labour Services"
+    name_np: ""  # TODO: confirm official Nepali service name
+    description: >
+      Foreign-employment labour approval procedures and Social Security
+      Fund services.
+    authority: "Department of Foreign Employment (DoFE); Social Security Fund (SSF)"
+    sources:
+      - name: "Department of Foreign Employment — Official Portal"
+        url: "https://dofe.gov.np/"
+        type: "portal"
+      - name: "Social Security Fund — Official Portal"
+        url: "https://ssf.gov.np"
+        type: "portal"
+        # No clean official on-site FAQ found either — ssf.gov.np's
+        # substantive procedural content (contribution rates, scheme
+        # eligibility, benefits) appears scattered across About/Board
+        # pages and PDF circulars rather than a single FAQ page.
+        # sosys.ssf.gov.np is the transactional login/registration portal
+        # (how to log in, not what the schemes are) — not a good source for
+        # this project's Q&A use case on its own.
+        # Third-party sites (e.g. bizsewa.com) have compiled fairly detailed
+        # SSF FAQs, but per the proposal's Legal section ("only documents
+        # verified as official"), these should NOT be ingested directly —
+        # at most, use them as a checklist of question types to look for
+        # on the actual ssf.gov.np site.
+
+  - id: health_social_welfare
+    name_en: "Health & Social Welfare Services"
+    name_np: ""  # TODO: confirm official Nepali service name
+    description: >
+      Government health insurance and social-security allowances
+      (e.g. senior-citizen allowance).
+    authority: "Health Insurance Board (HIB); DoNIDCR (Social Security Allowance FAQs)"
+    sources:
+      - name: "Health Insurance Board — Official Portal"
+        url: "https://hib.gov.np"
+        type: "portal"
+      - name: "DoNIDCR — Social Security Allowance FAQs"
+        url: "https://donidcr.gov.np/pages/mostly-asked-questions--social-security-4/"
+        type: "faq"
+        # Note: this source deliberately overlaps in *authority* with the
+        # identity_civil_registration domain above (same publishing
+        # department, different service). Proposal treats this as a
+        # targeted evaluation case for the domain classifier — keep the
+        # domain_id assignment on this source, not on the department.

@@ -1,0 +1,802 @@
+[
+  {
+    "id": "q001",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड कसरी लिन सकिन्छ?",
+    "english": "How to get a national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q002",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्डको आवेदन फारम कहाँ पाइन्छ?",
+    "english": "Where to get the citizenship application form?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q003",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड बनाउन कति दिन लाग्छ?",
+    "english": "How long does it take to make a national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q004",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड बनाउन के के कागजात चाहिन्छ?",
+    "english": "What documents are needed for a national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q005",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड हराएमा के गर्नुपर्छ?",
+    "english": "What to do if national ID card is lost?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q006",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड बदल्न कसरी गर्ने?",
+    "english": "How to update/modify national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q007",
+    "domain_id": "identity_civil_registration",
+    "question": "जन्म दर्ता कसरी गर्ने?",
+    "english": "How to register a birth?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q008",
+    "domain_id": "identity_civil_registration",
+    "question": "मृत्यु दर्ता कसरी गर्ने?",
+    "english": "How to register a death?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q009",
+    "domain_id": "identity_civil_registration",
+    "question": "विवाह दर्ता कसरी गर्ने?",
+    "english": "How to register a marriage?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q010",
+    "domain_id": "identity_civil_registration",
+    "question": "जन्म दर्ता गर्न कति दिन भित्र गर्नुपर्छ?",
+    "english": "Within how many days should birth be registered?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q011",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्डको लागि उमेर कति हुनुपर्छ?",
+    "english": "What is the minimum age for a national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q012",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड कति रकम खर्च हुन्छ?",
+    "english": "What is the fee for a national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q013",
+    "domain_id": "identity_civil_registration",
+    "question": "बच्चाको नागरिकता कार्ड कसरी बनाउने?",
+    "english": "How to make a national ID card for a child?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q014",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्डमा नाम बदल्न सकिन्छ?",
+    "english": "Can I change the name on my national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q015",
+    "domain_id": "identity_civil_registration",
+    "question": "जन्म प्रमाणपत्र कहाँबाट पाइन्छ?",
+    "english": "Where to get a birth certificate?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q016",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड बनाउन स्थानीय निकायमा कहाँ जानुपर्छ?",
+    "english": "Where to go at the local level to get a national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q017",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्डको स्थिति कसरी जाँच गर्ने?",
+    "english": "How to check national ID card status?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q018",
+    "domain_id": "identity_civil_registration",
+    "question": "अनाथ बच्चाको जन्म दर्ता कसरी गर्ने?",
+    "english": "How to register birth of an orphan child?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q019",
+    "domain_id": "identity_civil_registration",
+    "question": "विवाह दर्ता गर्न के कागजात चाहिन्छ?",
+    "english": "What documents are needed for marriage registration?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q020",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्डमा फोटो कस्तो हुनुपर्छ?",
+    "english": "What kind of photo is required for national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q021",
+    "domain_id": "identity_civil_registration",
+    "question": "स्थानान्तरण प्रमाणपत्र कसरी पाइन्छ?",
+    "english": "How to get a migration certificate?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q022",
+    "domain_id": "identity_civil_registration",
+    "question": "जन्म प्रमाणपत्रमा त्रु�टि पाएमा के गर्ने?",
+    "english": "What to do if there is an error in birth certificate?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q023",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्ड बनाउन आवश्यक नागरिकता कुन प्रकारको हुनुपर्छ?",
+    "english": "What type of citizenship is required for national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q024",
+    "domain_id": "identity_civil_registration",
+    "question": "नेपाली नागरिकता प्राप्त गर्ने विदेशी कसरी नागरिकता प्राप्त गर्न सक्छ?",
+    "english": "How can a foreigner obtain Nepali citizenship?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q025",
+    "domain_id": "identity_civil_registration",
+    "question": "नागरिकता कार्डको दोस्रो प्रति कसरी पाइन्छ?",
+    "english": "How to get a duplicate national ID card?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q026",
+    "domain_id": "land_property",
+    "question": "जग्गा नामसारी कसरी गर्ने?",
+    "english": "How to do land ownership transfer (namasari)?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q027",
+    "domain_id": "land_property",
+    "question": "लालपुर्जा कसरी पाइन्छ?",
+    "english": "How to get land certificate (lalpurja)?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q028",
+    "domain_id": "land_property",
+    "question": "जग्गा दर्ता कसरी गर्ने?",
+    "english": "How to register land?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q029",
+    "domain_id": "land_property",
+    "question": "जग्गाको नक्सा कहाँ पाइन्छ?",
+    "english": "Where to get land map?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q030",
+    "domain_id": "land_property",
+    "question": "जग्गा कर कसरी तिर्ने?",
+    "english": "How to pay land tax?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q031",
+    "domain_id": "land_property",
+    "question": "जग्गाको मूल्यांकन कसरी गरिन्छ?",
+    "english": "How is land valuation done?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q032",
+    "domain_id": "land_property",
+    "question": "जग्गा बिक्री गर्दा के कागजात चाहिन्छ?",
+    "english": "What documents are needed to sell land?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q033",
+    "domain_id": "land_property",
+    "question": "जग्गाको हदबन्द कसरी हुन्छ?",
+    "english": "How is land boundary demarcation done?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q034",
+    "domain_id": "land_property",
+    "question": "जग्गामा बाँडफाँड गर्दा के कर तिर्नुपर्छ?",
+    "english": "What taxes are paid on land partition?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q035",
+    "domain_id": "land_property",
+    "question": "जग्गा रैथाने सम्पत्ति मानिन्छ?",
+    "english": "What is considered ancestral property?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q036",
+    "domain_id": "land_property",
+    "question": "भूमि सुधार कार्यक्रम भनेको के हो?",
+    "english": "What is the land reform program?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q037",
+    "domain_id": "land_property",
+    "question": "जग्गा धितो कसरी राख्ने?",
+    "english": "How to mortgage land?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q038",
+    "domain_id": "land_property",
+    "question": "जग्गाको हकदार कसरी प्रमाणित गर्ने?",
+    "english": "How to prove land ownership?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q039",
+    "domain_id": "land_property",
+    "question": "जग्गा विवाद कसरी समाधान गर्ने?",
+    "english": "How to resolve land disputes?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q040",
+    "domain_id": "land_property",
+    "question": "नामसारी गर्दा कति शुल्क तिर्नुपर्छ?",
+    "english": "What is the fee for namasari (ownership transfer)?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q041",
+    "domain_id": "land_property",
+    "question": "जग्गा खरिद गर्दा के के हेर्नुपर्छ?",
+    "english": "What to check when buying land?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q042",
+    "domain_id": "land_property",
+    "question": "सरकारी जग्गा कसरी प्राप्त गर्न सकिन्छ?",
+    "english": "How to get government land?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q043",
+    "domain_id": "land_property",
+    "question": "जग्गाको क्षेत्रफल कसरी नापिन्छ?",
+    "english": "How is land area measured?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q044",
+    "domain_id": "land_property",
+    "question": "जग्गा अभिलेख कहाँ हेर्न सकिन्छ?",
+    "english": "Where to see land records?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q045",
+    "domain_id": "land_property",
+    "question": "विदेशी नागरिकले नेपालमा जग्गा किन्न सक्छ?",
+    "english": "Can foreigners buy land in Nepal?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q046",
+    "domain_id": "land_property",
+    "question": "जग्गाको वर्गीकरण कस्ता कस्ता छन्?",
+    "english": "What are the classifications of land?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q047",
+    "domain_id": "land_property",
+    "question": "जग्गा राख्नको लागि अधिकतम सीमा कति छ?",
+    "english": "What is the maximum land holding limit?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q048",
+    "domain_id": "land_property",
+    "question": "बाटो निकाल्दा जग्गा क्षतिपूर्ति कसरी पाइन्छ?",
+    "english": "How to get compensation for land acquired for road?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q049",
+    "domain_id": "land_property",
+    "question": "जग्गा हस्तान्तरण कसरी गर्ने?",
+    "english": "How to transfer land ownership?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q050",
+    "domain_id": "land_property",
+    "question": "जग्गाको बीमा कसरी गराउने?",
+    "english": "How to insure land?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q051",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार अनुमोदन कसरी लिने?",
+    "english": "How to get foreign employment approval?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q052",
+    "domain_id": "employment_labour",
+    "question": "सामाजिक सुरक्षा कोष (SSF) के हो?",
+    "english": "What is Social Security Fund (SSF)?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q053",
+    "domain_id": "employment_labour",
+    "question": "SSF मा दर्ता कसरी गर्ने?",
+    "english": "How to register in SSF?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q054",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार बीमा कसरी लिने?",
+    "english": "How to get foreign employment insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q055",
+    "domain_id": "employment_labour",
+    "question": "सामाजिक सुरक्षा कोषको योगदान दर कति हो?",
+    "english": "What is the SSF contribution rate?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q056",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार जान अनुमति कसरी पाइन्छ?",
+    "english": "How to get work permit for foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q057",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार कार्यक्रम के हो?",
+    "english": "What is the foreign employment program?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q058",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार कम्पनी छनौट गर्दा के हेर्नुपर्छ?",
+    "english": "What to check when choosing a foreign employment company?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q059",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा जानेहरूको लागि के तालिम चाहिन्छ?",
+    "english": "What training is required for foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q060",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारबाट फर्केपछि के लाभ पाइन्छ?",
+    "english": "What benefits are available after returning from foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q061",
+    "domain_id": "employment_labour",
+    "question": "SSF बाट के के लाभ पाइन्छ?",
+    "english": "What benefits are available from SSF?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q062",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा जानुअघि के कागजात तयार गर्नुपर्छ?",
+    "english": "What documents to prepare before going for foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q063",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार कम्पनीको लाइसेन्स कसरी जाँच गर्ने?",
+    "english": "How to verify foreign employment company license?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q064",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा काम गर्दा श्रमिक अधिकार के के छन्?",
+    "english": "What are workers' rights in foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q065",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार कर कसरी तिर्ने?",
+    "english": "How to pay foreign employment tax?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q066",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा जान कति उमेर हुनुपर्छ?",
+    "english": "What is the minimum age for foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q067",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार रकम कसरी पठाउने?",
+    "english": "How to send money from foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q068",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा जाने महिलाको लागि के व्यवस्था छ?",
+    "english": "What provisions exist for women in foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q069",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार कम्पनीले ठघाएमा के गर्ने?",
+    "english": "What to do if foreign employment company cheats?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q070",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार प्रत्यावर्तन कार्यक्रम के हो?",
+    "english": "What is the foreign employment return program?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q071",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा जानको लागि के खर्च हुन्छ?",
+    "english": "What are the costs of going for foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q072",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार कम्पनीको विवरण कहाँ हेर्न सकिन्छ?",
+    "english": "Where to see foreign employment company details?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q073",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा जानको लागि के स्वास्थ्य जाँच चाहिन्छ?",
+    "english": "What health checkups are needed for foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q074",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगारमा जानको लागि के भाषा तालिम चाहिन्छ?",
+    "english": "What language training is needed for foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q075",
+    "domain_id": "employment_labour",
+    "question": "वैदेशिक रोजगार पछि स्वदेशमा लगानी गर्न के सुविधा छ?",
+    "english": "What facilities exist for investing after returning from foreign employment?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q076",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा कसरी लिने?",
+    "english": "How to get health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q077",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा योजना के हो?",
+    "english": "What is the health insurance scheme?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q078",
+    "domain_id": "health_social_welfare",
+    "question": "बृद्धा भत्ता कसरी पाइन्छ?",
+    "english": "How to get senior citizen allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q079",
+    "domain_id": "health_social_welfare",
+    "question": "बृद्धा भत्ता आवेदन कसरी गर्ने?",
+    "english": "How to apply for senior citizen allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q080",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा कति रकम तिर्नुपर्छ?",
+    "english": "How much to pay for health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q081",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमाले के के कवर गर्छ?",
+    "english": "What does health insurance cover?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q082",
+    "domain_id": "health_social_welfare",
+    "question": "बृद्धा भत्ता कति रकम पाइन्छ?",
+    "english": "How much is the senior citizen allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q083",
+    "domain_id": "health_social_welfare",
+    "question": "बृद्धा भत्ता पाउन कति उमेर हुनुपर्छ?",
+    "english": "What is the minimum age for senior citizen allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q084",
+    "domain_id": "health_social_welfare",
+    "question": "मातृत्व भत्ता कसरी पाइन्छ?",
+    "english": "How to get maternity allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q085",
+    "domain_id": "health_social_welfare",
+    "question": "सामाजिक सुरक्षा भत्ता के हो?",
+    "english": "What is social security allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q086",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा कहाँबारे लिन सकिन्छ?",
+    "english": "Where to buy health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q087",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा कार्ड कसरी बनाउने?",
+    "english": "How to make health insurance card?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q088",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा भुक्तानी कसरी गर्ने?",
+    "english": "How to make health insurance claim?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q089",
+    "domain_id": "health_social_welfare",
+    "question": "अपाङ्ग भत्ता कसरी पाइन्छ?",
+    "english": "How to get disability allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q090",
+    "domain_id": "health_social_welfare",
+    "question": "विधवा भत्ता कसरी पाइन्छ?",
+    "english": "How to get widow allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q091",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमामा परिवार कसरी दर्ता गर्ने?",
+    "english": "How to register family in health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q092",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा कति समयसम्म मान्य हुन्छ?",
+    "english": "How long is health insurance valid?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q093",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा नवीकरण कसरी गर्ने?",
+    "english": "How to renew health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q094",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमामा कुन अस्पताल प्रयोग गर्न सकिन्छ?",
+    "english": "Which hospitals can be used with health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q095",
+    "domain_id": "health_social_welfare",
+    "question": "सामाजिक सुरक्षा भत्ता पाउन के योग्यता चाहिन्छ?",
+    "english": "What qualifications are needed for social security allowance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q096",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा र निजि बीमा के फरक हो?",
+    "english": "What is the difference between health insurance and private insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q097",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमामा औषधि खरिद कसरी गर्ने?",
+    "english": "How to purchase medicines with health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  },
+  {
+    "id": "q098",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा क्षतिपूर्ति कति पाइन्छ?",
+    "english": "How much reimbursement is available from health insurance?",
+    "gold_chunk_ids": [],
+    "difficulty": "hard"
+  },
+  {
+    "id": "q099",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा प्रीमियम कति हुन्छ?",
+    "english": "What is the health insurance premium?",
+    "gold_chunk_ids": [],
+    "difficulty": "easy"
+  },
+  {
+    "id": "q100",
+    "domain_id": "health_social_welfare",
+    "question": "स्वास्थ्य बीमा कम्पनीहरूको सूची कहाँ पाइन्छ?",
+    "english": "Where to find list of health insurance companies?",
+    "gold_chunk_ids": [],
+    "difficulty": "medium"
+  }
+]

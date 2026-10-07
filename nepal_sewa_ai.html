@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाल सेवा AI — Nepal Sewa AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C41E3A;
+            --primary-dark: #9B1B30;
+            --primary-light: #E85D75;
+            --accent: #1E3A5F;
+            --accent-light: #2C5282;
+            --bg: #0F172A;
+            --bg-card: #1E293B;
+            --bg-hover: #334155;
+            --bg-input: #0F172A;
+            --text: #F1F5F9;
+            --text-muted: #94A3B8;
+            --text-dim: #64748B;
+            --border: #334155;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --info: #3B82F6;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+            --transition: 0.2s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans Devanagari', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ── Layout ─────────────────────────────────────────── */
+        .app {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ── Sidebar ────────────────────────────────────────── */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: margin-left var(--transition);
+            z-index: 100;
+        }
+
+        .sidebar.collapsed {
+            margin-left: -280px;
+        }
+
+        .sidebar-header {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-header h1 .flag-icon {
+            font-size: 1.5rem;
+        }
+
+        .sidebar-header p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .new-chat-btn {
+            width: calc(100% - 2rem);
+            margin: 1rem;
+            padding: 0.625rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background var(--transition);
+        }
+
+        .new-chat-btn:hover { background: var(--primary-dark); }
+
+        .categories {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 0.5rem;
+        }
+
+        .categories-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+            padding: 0.75rem 0.75rem 0.5rem;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0.75rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background var(--transition);
+            margin-bottom: 0.125rem;
+        }
+
+        .category-item:hover { background: var(--bg-hover); }
+        .category-item.active { background: var(--bg-hover); border-left: 3px solid var(--primary); }
+
+        .category-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .category-icon.citizenship { background: rgba(196,30,58,0.15); }
+        .category-icon.national-id { background: rgba(30,58,95,0.3); }
+        .category-icon.dotm { background: rgba(245,158,11,0.15); }
+        .category-icon.ssf { background: rgba(16,185,129,0.15); }
+        .category-icon.labour { background: rgba(59,130,246,0.15); }
+
+        .category-info { flex: 1; min-width: 0; }
+        .category-name { font-size: 0.875rem; font-weight: 500; color: var(--text); }
+        .category-desc { font-size: 0.7rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .sidebar-footer a {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-footer a:hover { color: var(--text-muted); }
+
+        /* ── Main Content ───────────────────────────────────── */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ── Top Bar ────────────────────────────────────────── */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+            min-height: 56px;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .menu-toggle:hover { background: var(--bg-hover); color: var(--text); }
+
+        .topbar-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lang-select {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .admin-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            transition: all var(--transition);
+        }
+
+        .admin-btn:hover { border-color: var(--primary); color: var(--text); }
+
+        /* ── Chat Area ──────────────────────────────────────── */
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            scroll-behavior: smooth;
+        }
+
+        .chat-container::-webkit-scrollbar { width: 6px; }
+        .chat-container::-webkit-scrollbar-track { background: transparent; }
+        .chat-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        /* ── Welcome Screen ─────────────────────────────────── */
+        .welcome {
+            max-width: 720px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .welcome-hero {
+            margin-bottom: 2rem;
+        }
+
+        .welcome-hero h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .welcome-hero .tagline {
+            font-size: 1.1rem;
+            color: var(--primary-light);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .faq-section {
+            margin-top: 2rem;
+        }
+
+        .faq-section h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .faq-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-align: left;
+        }
+
+        .faq-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .faq-card .faq-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.375rem;
+        }
+
+        .faq-card .faq-category.citizenship { color: var(--primary-light); }
+        .faq-card .faq-category.national-id { color: #60A5FA; }
+        .faq-card .faq-category.dotm { color: var(--warning); }
+        .faq-card .faq-category.ssf { color: var(--success); }
+        .faq-card .faq-category.labour { color: var(--info); }
+
+        .faq-card .faq-question {
+            font-size: 0.875rem;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        /* ── Messages ───────────────────────────────────────── */
+        .message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: var(--accent);
+        }
+
+        .message.bot .message-avatar {
+            background: var(--primary);
+        }
+
+        .message-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.375rem;
+        }
+
+        .message-sender {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .message-body {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            line-height: 1.7;
+            font-size: 0.9375rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-body {
+            background: var(--accent);
+            border-color: var(--accent-light);
+        }
+
+        .message-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .domain-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.625rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .domain-badge.citizenship { background: rgba(196,30,58,0.15); color: var(--primary-light); }
+        .domain-badge.national-id { background: rgba(96,165,250,0.15); color: #60A5FA; }
+        .domain-badge.dotm { background: rgba(245,158,11,0.15); color: var(--warning); }
+        .domain-badge.ssf { background: rgba(16,185,129,0.15); color: var(--success); }
+        .domain-badge.labour { background: rgba(59,130,246,0.15); color: var(--info); }
+
+        .confidence-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.625rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .confidence-badge.high { background: rgba(16,185,129,0.15); color: var(--success); }
+        .confidence-badge.medium { background: rgba(245,158,11,0.15); color: var(--warning); }
+        .confidence-badge.low { background: rgba(239,68,68,0.15); color: var(--error); }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.625rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: rgba(59,130,246,0.15);
+            color: var(--info);
+        }
+
+        /* ── Citations ─────────────────────────────────────── */
+        .citations {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .citations-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .citation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .citation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .citation-item .citation-num {
+            color: var(--primary-light);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .citation-item a {
+            color: var(--info);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .citation-item a:hover { text-decoration: underline; }
+
+        /* ── Follow-up Questions ───────────────────────────── */
+        .follow-ups {
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .follow-up-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .follow-up-btn:hover {
+            border-color: var(--primary);
+            color: var(--text);
+        }
+
+        /* ── Input Area ────────────────────────────────────── */
+        .input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.75rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .input-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-box textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            padding-right: 3rem;
+            background: var(--bg-input);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            resize: none;
+            min-height: 52px;
+            max-height: 160px;
+            line-height: 1.5;
+            transition: border-color var(--transition);
+        }
+
+        .input-box textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .input-box textarea::placeholder {
+            color: var(--text-dim);
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover { background: var(--primary-dark); transform: scale(1.05); }
+        .send-btn:disabled { background: var(--text-dim); cursor: not-allowed; transform: none; }
+
+        .input-hint {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+        }
+
+        /* ── Typing Indicator ──────────────────────────────── */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem 0;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-8px); opacity: 1; }
+        }
+
+        /* ── Admin Dashboard Overlay ───────────────────────── */
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .admin-overlay.active { display: flex; }
+
+        .admin-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .admin-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .admin-close:hover { background: var(--bg-hover); color: var(--text); }
+
+        .admin-body {
+            padding: 1.5rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .admin-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-section h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .source-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .source-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .source-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .source-item-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .source-item-url {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .source-item-status {
+            padding: 0.2rem 0.625rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .source-item-status.active { background: rgba(16,185,129,0.15); color: var(--success); }
+        .source-item-status.inactive { background: rgba(239,68,68,0.15); color: var(--error); }
+
+        /* ── DOTM Result Checker Modal ─────────────────────── */
+        .dotm-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .dotm-modal.active { display: flex; }
+
+        .dotm-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dotm-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dotm-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .dotm-body {
+            padding: 1.5rem;
+        }
+
+        .dotm-body label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 0.375rem;
+        }
+
+        .dotm-body input, .dotm-body select {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .dotm-body input:focus, .dotm-body select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .dotm-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .dotm-result.found {
+            display: block;
+            background: rgba(16,185,129,0.1);
+            border: 1px solid rgba(16,185,129,0.3);
+        }
+
+        .dotm-result.not-found {
+            display: block;
+            background: rgba(245,158,11,0.1);
+            border: 1px solid rgba(245,158,11,0.3);
+        }
+
+        .dotm-result.unable {
+            display: block;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+
+        /* ── Responsive ────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 150;
+                margin-left: -280px;
+            }
+
+            .sidebar.open {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .chat-container {
+                padding: 1rem;
+            }
+
+            .welcome-hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-area {
+                padding: 0.75rem 1rem;
+            }
+
+            .topbar {
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        /* ── Sidebar Overlay (mobile) ──────────────────────── */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 140;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* ── Refusal Message ───────────────────────────────── */
+        .refusal-notice {
+            background: rgba(245,158,11,0.1);
+            border: 1px solid rgba(245,158,11,0.3);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--warning);
+        }
+
+        /* ── Loading Spinner ───────────────────────────────── */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ── Toast Notifications ───────────────────────────── */
+        .toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-lg);
+            animation: slideIn 0.3s ease;
+            max-width: 350px;
+        }
+
+        .toast.success { border-left: 3px solid var(--success); }
+        .toast.error { border-left: 3px solid var(--error); }
+        .toast.info { border-left: 3px solid var(--info); }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar Overlay (mobile) -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1><span class="flag-icon">🇳🇵</span> नेपाल सेवा AI</h1>
+                <p>नेपालका सरकारी सेवाबारे जानकारी</p>
+            </div>
+            <button class="new-chat-btn" onclick="startNewChat()">
+                <span>➕</span> नयाँ कुरा (New Chat)
+            </button>
+            <div class="categories">
+                <div class="categories-title">सेवा कोटिहरू (Categories)</div>
+                <div class="category-item active" data-category="all" onclick="selectCategory('all')">
+                    <div class="category-icon citizenship">🏛</div>
+                    <div class="category-info">
+                        <div class="category-name">सबै सेवाहरू</div>
+                        <div class="category-desc">All Services</div>
+                    </div>
+                </div>
+                <div class="category-item" data-category="citizenship" onclick="selectCategory('citizenship')">
+                    <div class="category-icon citizenship">🏛</div>
+                    <div class="category-info">
+                        <div class="category-name">नागरिकता</div>
+                        <div class="category-desc">Citizenship</div>
+                    </div>
+                </div>
+                <div class="category-item" data-category="national_id" onclick="selectCategory('national_id')">
+                    <div class="category-icon national-id">🪪</div>
+                    <div class="category-info">
+                        <div class="category-name">राष्ट्रिय परिचयपत्र</div>
+                        <div class="category-desc">National ID</div>
+                    </div>
+                </div>
+                <div class="category-item" data-category="dotm" onclick="selectCategory('dotm')">
+                    <div class="category-icon dotm">🚗</div>
+                    <div class="category-info">
+                        <div class="category-name">यातायात व्यवस्था</div>
+                        <div class="category-desc">DOTM / Transport</div>
+                    </div>
+                </div>
+                <div class="category-item" data-category="ssf" onclick="selectCategory('ssf')">
+                    <div class="category-icon ssf">👷</div>
+                    <div class="category-info">
+                        <div class="category-name">सामाजिक सुरक्षा कोष</div>
+                        <div class="category-desc">SSF</div>
+                    </div>
+                </div>
+                <div class="category-item" data-category="labour" onclick="selectCategory('labour')">
+                    <div class="category-icon labour">⚖</div>
+                    <div class="category-info">
+                        <div class="category-name">श्रम कानून</div>
+                        <div class="category-desc">Labour Law</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <a href="#" onclick="openDOTMChecker(); return false;">
+                    🚗 सवारी चालक अनुमतिपत्र परीक्षा नतिजा जाँच
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Top Bar -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                    <span class="topbar-title">नेपाल सेवा AI</span>
+                </div>
+                <div class="topbar-right">
+                    <select class="lang-select" id="langSelect" onchange="changeLanguage()">
+                        <option value="ne">नेपाली</option>
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                        <option value="rom">Roman Nepali</option>
+                    </select>
+                    <button class="admin-btn" onclick="openAdmin()">
+                        ⚙️ Admin
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Container -->
+            <div class="chat-container" id="chatContainer">
+                <!-- Welcome Screen -->
+                <div class="welcome" id="welcomeScreen">
+                    <div class="welcome-hero">
+                        <h2>नेपाल सेवा AI</h2>
+                        <p class="tagline">नेपालका सरकारी सेवाबारे जानकारी — सरल, छिटो र भरपर्दो रूपमा।</p>
+                        <p>Government services of Nepal — simplified, accessible and up to date.</p>
+                    </div>
+                    <div class="faq-section">
+                        <h3>तपाईंलाई के जानकारी चाहिएको छ? (What would you like to know?)</h3>
+                        <div class="faq-grid" id="faqGrid">
+                            <!-- FAQ cards will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <div class="input-box">
+                        <textarea id="questionInput" placeholder="नागरिकता, राष्ट्रिय परिचयपत्र, यातायात, SSF वा श्रम सम्बन्धी प्रश्न सोध्नुहोस्..." rows="1" onkeydown="handleKeyDown(event)" oninput="autoResize(this)"></textarea>
+                    </div>
+                    <button class="send-btn" id="sendBtn" onclick="askQuestion()">
+                        ➤
+                    </button>
+                </div>
+                <p class="input-hint">Enter सोध्नुहोस् • Shift+Enter नयाँ लाइनको लागि</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin Dashboard Overlay -->
+    <div class="admin-overlay" id="adminOverlay">
+        <div class="admin-panel">
+            <div class="admin-header">
+                <h2>⚙️ Admin Dashboard</h2>
+                <button class="admin-close" onclick="closeAdmin()">✕</button>
+            </div>
+            <div class="admin-body">
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statSources">0</div>
+                        <div class="stat-label">Total Sources</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statChunks">0</div>
+                        <div class="stat-label">Vector Chunks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statQuestions">0</div>
+                        <div class="stat-label">Questions Asked</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statDomains">0</div>
+                        <div class="stat-label">Active Domains</div>
+                    </div>
+                </div>
+                <div class="admin-section">
+                    <h3>Source Management</h3>
+                    <div class="source-list" id="sourceList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="admin-section">
+                    <h3>System Status</h3>
+                    <div class="source-list">
+                        <div class="source-item">
+                            <div class="source-item-info">
+                                <div class="source-item-name">RAG Backend</div>
+                                <div class="source-item-url" id="backendStatus">Checking...</div>
+                            </div>
+                            <span class="source-item-status active" id="backendStatusBadge">—</span>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-item-info">
+                                <div class="source-item-name">Last Crawl</div>
+                                <div class="source-item-url" id="lastCrawl">Never</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOTM Result Checker Modal -->
+    <div class="dotm-modal" id="dotmModal">
+        <div class="dotm-panel">
+            <div class="dotm-header">
+                <h2>🚗 सवारी चालक अनुमतिपत्र परीक्षा नतिजा जाँच</h2>
+                <button class="admin-close" onclick="closeDOTMChecker()">✕</button>
+            </div>
+            <div class="dotm-body">
+                <label for="applicantNumber">Applicant Number (आवेदक नम्बर)</label>
+                <input type="text" id="applicantNumber" placeholder="Enter applicant number...">
+                <label for="transportOffice">Transport Office (यातायात कार्यालय)</label>
+                <select id="transportOffice">
+                    <option value="ekantakuna">Ekantakuna / Lalitpur</option>
+                    <option value="thulobharyang">Thulobharyang / Kathmandu</option>
+                    <option value="bhaktapur">Bhaktapur</option>
+                    <option value="other">Other</option>
+                </select>
+                <button class="new-chat-btn" style="margin: 0;" onclick="checkDOTMResult()">
+                    नतिजा जाँच गर्नुहोस् (Check Result)
+                </button>
+                <div class="dotm-result" id="dotmResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // ── Configuration ────────────────────────────────────
+        const API_BASE = 'http://localhost:8000';
+        const DEFAULT_TOPICS = [
+            { category: 'citizenship', question: 'नागरिकता बनाउन के-के कागजात चाहिन्छ?' },
+            { category: 'citizenship', question: 'नागरिकता बनाउन कति समय लाग्छ?' },
+            { category: 'citizenship', question: 'आमाको नामबाट नागरिकता कसरी बनाउने?' },
+            { category: 'citizenship', question: 'नागरिकता हराएमा के गर्ने?' },
+            { category: 'national_id', question: 'राष्ट्रिय परिचयपत्र बनाउन के चाहिन्छ?' },
+            { category: 'national_id', question: 'National ID बनाउन कति शुल्क लाग्छ?' },
+            { category: 'national_id', question: 'National ID status कसरी हेर्ने?' },
+            { category: 'dotm', question: 'Driving License कसरी बनाउने?' },
+            { category: 'dotm', question: 'Written exam को result कसरी हेर्ने?' },
+            { category: 'dotm', question: 'Trial मा fail भएपछि के गर्ने?' },
+            { category: 'dotm', question: 'Bluebook renewal कसरी गर्ने?' },
+            { category: 'dotm', question: 'सवारी नामसारी गर्न के चाहिन्छ?' },
+            { category: 'ssf', question: 'SSF मा कसरी register गर्ने?' },
+            { category: 'ssf', question: 'SSF का benefits के हुन्?' },
+            { category: 'ssf', question: 'SSF बाट loan कसरी लिने?' },
+            { category: 'labour', question: 'Labour Act 2074 अनुसार working hours कति हो?' },
+            { category: 'labour', question: 'कर्मचारीलाई कति दिन leave पाइन्छ?' },
+            { category: 'labour', question: 'Overtime को व्यवस्था के छ?' },
+        ];
+
+        const FOLLOW_UPS = {
+            citizenship: [
+                'नागरिकता बनाउन कति समय लाग्छ?',
+                'आमाको नामबाट नागरिकता कसरी बनाउने?',
+                'नागरिकता हराएमा के गर्ने?',
+            ],
+            national_id: [
+                'National ID बनाउन कति शुल्क लाग्छ?',
+                'National ID status कसरी हेर्ने?',
+                'National ID कसरी सुचारु गर्ने?',
+            ],
+            dotm: [
+                'Driving License कसरी बनाउने?',
+                'Written exam को result कसरी हेर्ने?',
+                'Bluebook renewal कसरी गर्ने?',
+            ],
+            ssf: [
+                'SSF का benefits के हुन्?',
+                'SSF बाट loan कसरी लिने?',
+                'SSF मा कसरी register गर्ने?',
+            ],
+            labour: [
+                'कर्मचारीलाई कति दिन leave पाइन्छ?',
+                'Overtime को व्यवस्था के छ?',
+                'Labour Act 2074 अनुसार working hours कति हो?',
+            ],
+        };
+
+        // ── State ────────────────────────────────────────────
+        let currentCategory = 'all';
+        let isProcessing = false;
+        let questionCount = 0;
+
+        // ── Initialization ───────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            populateFAQGrid();
+            checkBackendHealth();
+            loadAdminStats();
+        });
+
+        // ── FAQ Grid ─────────────────────────────────────────
+        function populateFAQGrid() {
+            const grid = document.getElementById('faqGrid');
+            const filtered = currentCategory === 'all'
+                ? DEFAULT_TOPICS
+                : DEFAULT_TOPICS.filter(t => t.category === currentCategory);
+
+            grid.innerHTML = filtered.map(topic => `
+                <div class="faq-card" onclick="askQuestion('${topic.question.replace(/'/g, "\\'")}')">
+                    <div class="faq-category ${topic.category}">${getCategoryName(topic.category)}</div>
+                    <div class="faq-question">${topic.question}</div>
+                </div>
+            `).join('');
+        }
+
+        function getCategoryName(cat) {
+            const names = {
+                citizenship: '🏛 नागरिकता',
+                national_id: '🪪 राष्ट्रिय परिचयपत्र',
+                dotm: '🚗 यातायात',
+                ssf: '👷 SSF',
+                labour: '⚖ श्रम कानून',
+            };
+            return names[cat] || cat;
+        }
+
+        // ── Category Selection ───────────────────────────────
+        function selectCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.category === category);
+            });
+            populateFAQGrid();
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        }
+
+        // ── Sidebar Toggle ───────────────────────────────────
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // ── Chat Functions ───────────────────────────────────
+        function startNewChat() {
+            document.getElementById('chatContainer').innerHTML = '';
+            document.getElementById('welcomeScreen')?.remove();
+            const welcome = document.createElement('div');
+            welcome.className = 'welcome';
+            welcome.id = 'welcomeScreen';
+            welcome.innerHTML = `
+                <div class="welcome-hero">
+                    <h2>नेपाल सेवा AI</h2>
+                    <p class="tagline">नेपालका सरकारी सेवाबारे जानकारी — सरल, छिटो र भरपर्दो रूपमा।</p>
+                    <p>Government services of Nepal — simplified, accessible and up to date.</p>
+                </div>
+                <div class="faq-section">
+                    <h3>तपाईंलाई के जानकारी चाहिएको छ?</h3>
+                    <div class="faq-grid" id="faqGrid"></div>
+                </div>
+            `;
+            document.getElementById('chatContainer').appendChild(welcome);
+            populateFAQGrid();
+            if (window.innerWidth <= 768) toggleSidebar();
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                askQuestion();
+            }
+        }
+
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 160) + 'px';
+        }
+
+        async function askQuestion(predefinedQuestion) {
+            const input = document.getElementById('questionInput');
+            const question = predefinedQuestion || input.value.trim();
+            if (!question || isProcessing) return;
+
+            // Hide welcome screen
+            document.getElementById('welcomeScreen')?.remove();
+
+            // Add user message
+            addMessage('user', question);
+            input.value = '';
+            input.style.height = 'auto';
+
+            // Show typing indicator
+            isProcessing = true;
+            const typingId = addTypingIndicator();
+
+            try {
+                const response = await fetch(`${API_BASE}/api/ask`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question }),
+                });
+
+                if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+                const data = await response.json();
+                removeTypingIndicator(typingId);
+                addMessage('bot', data.answer, data);
+
+                questionCount++;
+                updateQuestionCount();
+
+                // Show follow-up questions from API
+                if (data.follow_ups && data.follow_ups.length > 0) {
+                    addFollowUps(data.follow_ups);
+                }
+            } catch (error) {
+                removeTypingIndicator(typingId);
+                addMessage('bot', `माफ गर्नुहोस्, सर्भरमा समस्या भयो। कृपया फेरि प्रयास गर्नुहोस्।\n\nError: ${error.message}`, null, true);
+                showToast('Connection error. Is the backend running?', 'error');
+            } finally {
+                isProcessing = false;
+            }
+        }
+
+        function addMessage(role, text, data = null, isError = false) {
+            const container = document.getElementById('chatContainer');
+            const time = new Date().toLocaleTimeString('ne-NP', { hour: '2-digit', minute: '2-digit' });
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+
+            let metaHtml = '';
+            if (role === 'bot' && data) {
+                const confidence = data.confidence || 0;
+                const confidenceClass = confidence > 0.6 ? 'high' : confidence > 0.3 ? 'medium' : 'low';
+                const confidenceLabel = confidence > 0.6 ? 'High' : confidence > 0.3 ? 'Medium' : 'Low';
+
+                metaHtml = `<div class="message-meta">`;
+                if (data.domain_id) {
+                    metaHtml += `<span class="domain-badge ${data.domain_id}">${getCategoryName(data.domain_id)}</span>`;
+                }
+                metaHtml += `<span class="confidence-badge ${confidenceClass}">● ${confidenceLabel} confidence</span>`;
+                metaHtml += `<span class="verified-badge">✓ Last verified: ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>`;
+                metaHtml += `</div>`;
+
+                // Citations
+                if (data.citations && data.citations.length > 0) {
+                    metaHtml += `<div class="citations">
+                        <div class="citations-title">📚 स्रोत / Sources:</div>
+                        <div class="citation-list">
+                            ${data.citations.map((c, i) => `
+                                <div class="citation-item">
+                                    <span class="citation-num">[${i + 1}]</span>
+                                    <a href="${c.url}" target="_blank" rel="noopener">${c.name}</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>`;
+                }
+
+                // Refusal notice
+                if (data.refused) {
+                    metaHtml += `<div class="refusal-notice">
+                        ⚠️ ${data.answer}
+                    </div>`;
+                }
+            }
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${role === 'user' ? '👤' : '🤖'}</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-sender">${role === 'user' ? 'तपाईं (You)' : 'नेपाल सेवा AI'}</span>
+                        <span class="message-time">${time}</span>
+                    </div>
+                    <div class="message-body">${text}</div>
+                    ${metaHtml}
+                </div>
+            `;
+
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const container = document.getElementById('chatContainer');
+            const id = 'typing-' + Date.now();
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = id;
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            `;
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+            return id;
+        }
+
+        function removeTypingIndicator(id) {
+            document.getElementById(id)?.remove();
+        }
+
+        function addFollowUps(questions) {
+            const container = document.getElementById('chatContainer');
+            const followUpsDiv = document.createElement('div');
+            followUpsDiv.className = 'follow-ups';
+            followUpsDiv.innerHTML = questions.map(q =>
+                `<button class="follow-up-btn" onclick="askQuestion('${q.replace(/'/g, "\\'")}')">${q}</button>`
+            ).join('');
+            container.appendChild(followUpsDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ── Admin Dashboard ──────────────────────────────────
+        function openAdmin() {
+            document.getElementById('adminOverlay').classList.add('active');
+            loadAdminStats();
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminOverlay').classList.remove('active');
+        }
+
+        async function loadAdminStats() {
+            try {
+                // Try the new admin overview endpoint first
+                const response = await fetch(`${API_BASE}/api/admin/overview`);
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('statSources').textContent = data.total_chunks || 0;
+                    document.getElementById('statChunks').textContent = data.total_chunks || 0;
+                    document.getElementById('statDomains').textContent = Object.keys(data.domain_distribution || {}).length || 0;
+                    document.getElementById('statQuestions').textContent = data.total_questions || 0;
+
+                    // Populate source list from stats endpoint
+                    const statsResponse = await fetch(`${API_BASE}/api/stats`);
+                    if (statsResponse.ok) {
+                        const statsData = await statsResponse.json();
+                        const sourceList = document.getElementById('sourceList');
+                        if (statsData.sources && statsData.sources.length > 0) {
+                            sourceList.innerHTML = statsData.sources.map(s => `
+                                <div class="source-item">
+                                    <div class="source-item-info">
+                                        <div class="source-item-name">${s.name}</div>
+                                        <div class="source-item-url">${s.url}</div>
+                                    </div>
+                                    <span class="source-item-status active">Active</span>
+                                </div>
+                            `).join('');
+                        } else {
+                            sourceList.innerHTML = '<p style="color: var(--text-dim); font-size: 0.875rem;">No sources configured. Run the ingestion pipeline first.</p>';
+                        }
+                    }
+                    return;
+                }
+            } catch (error) {
+                // Fallback to basic stats
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/stats`);
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('statSources').textContent = data.sources?.length || 0;
+                    document.getElementById('statChunks').textContent = data.total_chunks || 0;
+                    document.getElementById('statDomains').textContent = data.total_domains || 0;
+                    document.getElementById('statQuestions').textContent = questionCount;
+                }
+            } catch (error) {
+                document.getElementById('statSources').textContent = '—';
+                document.getElementById('statChunks').textContent = '—';
+                document.getElementById('statDomains').textContent = '—';
+            }
+        }
+
+        function updateQuestionCount() {
+            document.getElementById('statQuestions').textContent = questionCount;
+        }
+
+        // ── Backend Health Check ─────────────────────────────
+        async function checkBackendHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/api/health`);
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('backendStatus').textContent = `Running (v${data.version})`;
+                    document.getElementById('backendStatusBadge').textContent = 'Online';
+                    document.getElementById('backendStatusBadge').className = 'source-item-status active';
+                }
+            } catch (error) {
+                document.getElementById('backendStatus').textContent = 'Not reachable';
+                document.getElementById('backendStatusBadge').textContent = 'Offline';
+                document.getElementById('backendStatusBadge').className = 'source-item-status inactive';
+                showToast('Backend not reachable. Start the FastAPI server.', 'error');
+            }
+        }
+
+        // ── DOTM Result Checker ─────────────────────────────
+        function openDOTMChecker() {
+            document.getElementById('dotmModal').classList.add('active');
+        }
+
+        function closeDOTMChecker() {
+            document.getElementById('dotmModal').classList.remove('active');
+            document.getElementById('dotmResult').className = 'dotm-result';
+            document.getElementById('dotmResult').innerHTML = '';
+        }
+
+        async function checkDOTMResult() {
+            const applicantNumber = document.getElementById('applicantNumber').value.trim();
+            const transportOffice = document.getElementById('transportOffice').value;
+            const resultDiv = document.getElementById('dotmResult');
+
+            if (!applicantNumber) {
+                resultDiv.className = 'dotm-result unable';
+                resultDiv.innerHTML = '⚠️ कृपया आवेदक नम्बर प्रविष्ट गर्नुहोस्।';
+                return;
+            }
+
+            resultDiv.className = 'dotm-result';
+            resultDiv.innerHTML = '<div class="spinner" style="margin: 0 auto;"></div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/dotm/check`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        applicant_number: applicantNumber,
+                        transport_office: transportOffice,
+                    }),
+                });
+
+                if (!response.ok) throw new Error('Check failed');
+
+                const data = await response.json();
+
+                if (data.status === 'found') {
+                    resultDiv.className = 'dotm-result found';
+                    resultDiv.innerHTML = `
+                        <strong>✓ ${data.message}</strong><br>
+                        <small>Office: ${data.transport_office}</small><br>
+                        <small>Source: ${data.source}</small><br>
+                        <small>Checked: ${new Date(data.checked_at).toLocaleString()}</small>
+                    `;
+                } else {
+                    resultDiv.className = 'dotm-result not-found';
+                    resultDiv.innerHTML = `
+                        <strong>✗ ${data.message}</strong><br>
+                        <small>Office: ${data.transport_office}</small><br>
+                        <small>Source: ${data.source}</small><br>
+                        <small>Checked: ${new Date(data.checked_at).toLocaleString()}</small>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.className = 'dotm-result unable';
+                resultDiv.innerHTML = '⚠️ सर्भरमा समस्या भयो। कृपया फेरि प्रयास गर्नुहोस्।';
+            }
+        }
+
+        // ── Language & UI ───────────────────────────────────
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            showToast(`Language changed to ${lang}`, 'info');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        // ── Close modals on outside click ───────────────────
+        document.getElementById('adminOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeAdmin();
+        });
+        document.getElementById('dotmModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeDOTMChecker();
+        });
+    </script>
+</body>
+</html>

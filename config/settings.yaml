@@ -1,0 +1,153 @@
+# Project settings — all paths, model names, and tunable parameters live here.
+# Edit this file to change behavior without touching code.
+
+# ── Paths ──────────────────────────────────────────────────────────────────────
+paths:
+  config_dir: config
+  data_dir: data
+  raw_dir: data/raw
+  processed_dir: data/processed
+  eval_dir: data/eval
+  index_dir: data/index
+  log_dir: logs
+
+# ── Ingestion ──────────────────────────────────────────────────────────────────
+ingestion:
+  request_timeout_seconds: 20
+  delay_between_requests_seconds: 1.0
+  user_agent: "Mozilla/5.0 (compatible; NepalPublicServiceRAG/1.0; research project)"
+  max_retries: 3
+  retry_backoff_seconds: 2.0
+
+# ── Document Processing ────────────────────────────────────────────────────────
+processing:
+  # Unicode normalization for Nepali text
+  unicode_normalize: true
+  # Minimum characters for a chunk to be kept
+  min_chunk_chars: 50
+  # OCR settings
+  ocr:
+    enabled: true
+    language: "neng"  # Nepali + English
+    dpi: 300
+
+# ── Chunking ───────────────────────────────────────────────────────────────────
+chunking:
+  # Strategy: "structure_aware" preserves FAQ pairs, sections, headings
+  strategy: "structure_aware"
+  max_chunk_tokens: 500
+  chunk_overlap_tokens: 50
+  # Minimum chunks per document to be included
+  min_chunks_per_doc: 1
+
+# ── Domain Classifier ─────────────────────────────────────────────────────────
+classifier:
+  # Type: "embedding" (logistic regression on embeddings) or "keyword" baseline
+  type: "embedding"
+  # Embedding model for classifier (same as retrieval for consistency)
+  embedding_model: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  # Training
+  test_size: 0.2
+  random_seed: 42
+  # Keyword baseline keywords per domain (used when type: "keyword")
+  keyword_baseline:
+    identity_civil_registration:
+      - "national id"
+      - "nagarikta"
+      - "birth registration"
+      - "death registration"
+      - "marriage registration"
+      - "civil registration"
+      - "nagarikta pratifal"
+    land_property:
+      - "land"
+      - "jagga"
+      - "namasari"
+      - "property"
+      - "land registration"
+      - "land ownership"
+      - "dolma"
+    employment_labour:
+      - "foreign employment"
+      - "labour"
+      - "social security"
+      - "ssf"
+      - "dofe"
+      - "rojgari"
+      - "bidesh rojgar"
+    health_social_welfare:
+      - "health insurance"
+      - "medical"
+      - "hospital"
+      - "senior citizen"
+      - "social security allowance"
+      - "janma"
+      - "health"
+
+# ── Retrieval ─────────────────────────────────────────────────────────────────
+retrieval:
+  # Active mode: "bm25", "dense", or "hybrid"
+  mode: "hybrid"
+  # Embedding model
+  embedding_model: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  # Vector store: "chromadb"
+  vector_store: "chromadb"
+  # Number of results to retrieve
+  top_k: 5
+  # Hybrid weights (BM25 vs dense)
+  hybrid:
+    bm25_weight: 0.4
+    dense_weight: 0.6
+  # BM25 parameters
+  bm25:
+    k1: 1.5
+    b: 0.75
+  # ChromaDB settings
+  chromadb:
+    collection_name: "nepal_gov_services"
+    persist_dir: data/index/chroma
+
+# ── Generation ────────────────────────────────────────────────────────────────
+generation:
+  # LLM provider: "openai", "anthropic", "ollama", "openrouter"
+  provider: "openai"
+  # Model name
+  model: "gpt-4o-mini"
+  temperature: 0.1
+  max_tokens: 1024
+  # System prompt language: "nepali" or "english"
+  system_language: "nepali"
+  # Citation format
+  citation_format: "[{index}] {source_name} — {source_url}"
+  # Refusal settings
+  refusal:
+    enabled: true
+    threshold: 0.3  # minimum similarity score to attempt answer
+    message: "माफ गर्नुहोस्, मसँग यस प्रश्नको उत्तर दिने पर्याप्त प्रमाण छैन। कृपया सम्बन्धित निकायमा सोध्नुहोस्।"
+
+# ── Evaluation ────────────────────────────────────────────────────────────────
+evaluation:
+  # Number of questions in eval set
+  total_questions: 100
+  questions_per_domain: 25
+  # Retrieval metrics
+  retrieval_metrics:
+    - "precision@k"
+    - "recall@k"
+    - "mrr"
+  k_values: [1, 3, 5]
+  # Generation metrics (human-evaluated subset)
+  generation_metrics:
+    - "groundedness"
+    - "relevance"
+    - "citation_correctness"
+    - "clarity"
+  human_eval_subset_size: 20
+
+# ── App ───────────────────────────────────────────────────────────────────────
+app:
+  title: "Nepal Government Services RAG"
+  description: "Ask questions about Nepal government public services in Nepali or English"
+  share: false
+  server_name: "0.0.0.0"
+  server_port: 7860

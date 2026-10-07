@@ -1,0 +1,37 @@
+[project]
+name = "nepal-rag-agent"
+version = "1.0.0"
+description = "Domain-Aware RAG Agent for Nepal Government Public Services"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Jenny Thapa" }]
+
+dependencies = [
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "PyYAML>=6.0",
+    "pymupdf>=1.24",
+    "pytesseract>=0.3.10",
+    "sentence-transformers>=3.0",
+    "rank-bm25>=0.2.2",
+    "chromadb>=0.5",
+    "scikit-learn>=1.4",
+    "gradio>=4.0",
+    "pytest>=8.0",
+    "python-dotenv>=1.0",
+    "openai>=1.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "tqdm>=4.65",
+    "rich>=13.0",
+]
+
+[project.scripts]
+nepal-rag = "src.main:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
